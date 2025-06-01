@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    margin: 2rem;
+}
+
+.timer-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.timer-display {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #333;
+    margin: 1rem 0;
+}
+
+.timer-buttons, .timer-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#stop {
+    background-color: #f44336;
+}
+
+#stop:hover {
+    background-color: #da190b;
+}
+
+#reset {
+    background-color: #2196F3;
+}
+
+#reset:hover {
+    background-color: #1976D2;
+}
+
+.todo-section {
+    padding: 1rem;
+}
+
+.todo-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#listTitle {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.todo-input {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#newTodo {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#todoList {
+    list-style: none;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.todo-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 1rem;
+}
+
+.delete-btn {
+    margin-left: auto;
+    background-color: #ff4444;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+.animation-container {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.tomato-animation {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tomato-animation img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+} 

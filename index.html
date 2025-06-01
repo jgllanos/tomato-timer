@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato Timer</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="timer-section">
+            <h1>Tomato Timer</h1>
+            <div class="animation-container">
+                <!-- Work Animation -->
+                <div class="tomato-animation" id="workAnimation">
+                    <img id="workTomato1" src="assets/work_block_tomato1.jpeg" alt="Work Tomato 1">
+                    <img id="workTomato2" src="assets/work_block_tomato2.jpeg" alt="Work Tomato 2" style="display: none;">
+                </div>
+                <!-- Short Break Animation -->
+                <div class="tomato-animation" id="shortBreakAnimation" style="display: none;">
+                    <img id="shortBreakTomato1" src="assets/short_break_tomato1.jpeg" alt="Short Break Tomato 1">
+                    <img id="shortBreakTomato2" src="assets/short_break_tomato2.jpeg" alt="Short Break Tomato 2" style="display: none;">
+                </div>
+                <!-- Long Break Animation -->
+                <div class="tomato-animation" id="longBreakAnimation" style="display: none;">
+                    <img id="longBreakTomato1" src="assets/long_break_tomato1.jpeg" alt="Long Break Tomato 1">
+                    <img id="longBreakTomato2" src="assets/long_break_tomato2.jpeg" alt="Long Break Tomato 2" style="display: none;">
+                </div>
+            </div>
+            <div class="timer-display">25:00</div>
+            <div class="timer-buttons">
+                <button id="work">Work (25m)</button>
+                <button id="shortBreak">Short Break (5m)</button>
+                <button id="longBreak">Long Break (15m)</button>
+            </div>
+            <div class="timer-controls">
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+
+        <div class="todo-section">
+            <div class="todo-header">
+                <input type="text" id="listTitle" placeholder="List Title" value="My Tasks">
+                <button id="newList">New List</button>
+            </div>
+            <div class="todo-input">
+                <input type="text" id="newTodo" placeholder="Add a new task...">
+                <button id="addTodo">Add</button>
+            </div>
+            <ul id="todoList"></ul>
+        </div>
+    </div>
+    <audio id="dingSound" src="assets/ding.mp3"></audio>
+    <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
