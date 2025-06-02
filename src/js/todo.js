@@ -10,6 +10,18 @@ function createTodoItem(text) {
     checkbox.type = 'checkbox';
     checkbox.addEventListener('change', () => {
         li.classList.toggle('completed');
+        if (li.classList.contains('completed')) {
+            // Move to bottom when completed
+            todoList.appendChild(li);
+        } else {
+            // Move back to top when uncompleted
+            const firstCompleted = todoList.querySelector('.completed');
+            if (firstCompleted) {
+                todoList.insertBefore(li, firstCompleted);
+            } else {
+                todoList.insertBefore(li, todoList.firstChild);
+            }
+        }
     });
     
     const span = document.createElement('span');
