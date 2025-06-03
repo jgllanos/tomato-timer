@@ -43,7 +43,13 @@ function createTodoItem(text) {
 function addTodo() {
     const text = newTodoInput.value.trim();
     if (text) {
-        todoList.appendChild(createTodoItem(text));
+        const newItem = createTodoItem(text);
+        const firstCompleted = todoList.querySelector('.completed');
+        if (firstCompleted) {
+            todoList.insertBefore(newItem, firstCompleted);
+        } else {
+            todoList.insertBefore(newItem, todoList.firstChild);
+        }
         newTodoInput.value = '';
     }
 }
