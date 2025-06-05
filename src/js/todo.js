@@ -48,7 +48,14 @@ function addTodo() {
         if (firstCompleted) {
             todoList.insertBefore(newItem, firstCompleted);
         } else {
-            todoList.appendChild(newItem);
+            // Find the last unchecked item
+            const uncheckedItems = Array.from(todoList.children).filter(item => !item.classList.contains('completed'));
+            if (uncheckedItems.length > 0) {
+                const lastUnchecked = uncheckedItems[uncheckedItems.length - 1];
+                todoList.insertBefore(newItem, lastUnchecked.nextSibling);
+            } else {
+                todoList.appendChild(newItem);
+            }
         }
         newTodoInput.value = '';
     }
