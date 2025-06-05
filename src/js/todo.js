@@ -48,7 +48,7 @@ function addTodo() {
         if (firstCompleted) {
             todoList.insertBefore(newItem, firstCompleted);
         } else {
-            todoList.insertBefore(newItem, todoList.firstChild);
+            todoList.appendChild(newItem);
         }
         newTodoInput.value = '';
     }
