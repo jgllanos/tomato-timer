@@ -23,6 +23,7 @@ body {
     margin: 2rem;
 }
 
+/* Timer Section Styles */
 .timer-section {
     text-align: center;
     margin-bottom: 2rem;
@@ -74,10 +75,12 @@ button:hover {
     background-color: #1976D2;
 }
 
+/* Todo Section Styles */
 .todo-section {
     padding: 1rem;
 }
 
+/* Todo Header */
 .todo-header {
     display: flex;
     gap: 1rem;
@@ -92,6 +95,7 @@ button:hover {
     font-size: 1.2rem;
 }
 
+/* Todo Input */
 .todo-input {
     display: flex;
     gap: 1rem;
@@ -105,10 +109,12 @@ button:hover {
     border-radius: 5px;
 }
 
+/* Todo List */
 #todoList {
     list-style: none;
 }
 
+/* Todo Items */
 .todo-item {
     display: flex;
     align-items: center;
@@ -130,18 +136,34 @@ button:hover {
     pointer-events: auto;
 }
 
-.delete-btn {
-    margin-left: auto;
-    background-color: #ff4444;
+/* Todo Item Buttons */
+.delete-btn, .edit-btn {
+    margin-left: 0.5rem;
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
     pointer-events: auto;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn {
+    background-color: #f44336;
 }
 
 .delete-btn:hover {
-    background-color: #cc0000;
+    background-color: #da190b;
 }
 
+.edit-btn {
+    background-color: #2196F3;
+}
+
+.edit-btn:hover {
+    background-color: #1976D2;
+}
+
+/* Todo Item States */
 .todo-item.completed {
     text-decoration: line-through;
     color: #888;
@@ -156,7 +178,7 @@ button:hover {
     background-color: #f0f8f0;
 }
 
-/* Top indicator */
+/* Drag and Drop Indicators */
 .todo-item.drag-over::before {
     content: '';
     position: absolute;
@@ -169,7 +191,6 @@ button:hover {
     display: none;
 }
 
-/* Bottom indicator */
 .todo-item.drag-over::after {
     content: '';
     position: absolute;
@@ -182,16 +203,15 @@ button:hover {
     display: none;
 }
 
-/* Show top indicator when dragging over top half */
 .todo-item.drag-over.drag-over-top::before {
     display: block;
 }
 
-/* Show bottom indicator when dragging over bottom half */
 .todo-item.drag-over:not(.drag-over-top)::after {
     display: block;
 }
 
+/* Animation Container */
 .animation-container {
     width: 300px;
     height: 300px;

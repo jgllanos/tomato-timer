@@ -38,6 +38,13 @@ function createTodoItem(text) {
     const span = document.createElement('span');
     span.textContent = text;
     
+    const editBtn = document.createElement('button');
+    editBtn.className = 'edit-btn';
+    editBtn.textContent = '✎';
+    editBtn.addEventListener('click', () => {
+        startEditing(li, span, text);
+    });
+    
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'delete-btn';
     deleteBtn.textContent = '×';
@@ -47,8 +54,85 @@ function createTodoItem(text) {
     
     li.appendChild(checkbox);
     li.appendChild(span);
+    li.appendChild(editBtn);
     li.appendChild(deleteBtn);
     return li;
+}
+
+function startEditing(li, span, originalText) {
+    // Create input field
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = originalText;
+    input.className = 'edit-input';
+    
+    // Replace span with input
+    span.replaceWith(input);
+    input.focus();
+    input.select();
+    
+    // Store original text for cancel
+    li.dataset.originalText = originalText;
+    
+    // Add event listeners for editing
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            saveEdit(li, input);
+        } else if (e.key === 'Escape') {
+            cancelEdit(li, input, originalText);
+        }
+    });
+    
+    input.addEventListener('blur', () => {
+        saveEdit(li, input);
+    });
+}
+
+function saveEdit(li, input) {
+    const newText = input.value.trim();
+    if (newText) {
+        const span = document.createElement('span');
+        span.textContent = newText;
+        input.replaceWith(span);
+        
+        // Remove old edit button and create new one
+        const oldEditBtn = li.querySelector('.edit-btn');
+        if (oldEditBtn) oldEditBtn.remove();
+        
+        const editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.textContent = '✎';
+        editBtn.addEventListener('click', () => {
+            startEditing(li, span, newText);
+        });
+        
+        // Insert before delete button
+        const deleteBtn = li.querySelector('.delete-btn');
+        li.insertBefore(editBtn, deleteBtn);
+    } else {
+        cancelEdit(li, input, li.dataset.originalText);
+    }
+}
+
+function cancelEdit(li, input, originalText) {
+    const span = document.createElement('span');
+    span.textContent = originalText;
+    input.replaceWith(span);
+    
+    // Remove old edit button and create new one
+    const oldEditBtn = li.querySelector('.edit-btn');
+    if (oldEditBtn) oldEditBtn.remove();
+    
+    const editBtn = document.createElement('button');
+    editBtn.className = 'edit-btn';
+    editBtn.textContent = '✎';
+    editBtn.addEventListener('click', () => {
+        startEditing(li, span, originalText);
+    });
+    
+    // Insert before delete button
+    const deleteBtn = li.querySelector('.delete-btn');
+    li.insertBefore(editBtn, deleteBtn);
 }
 
 // Drag and Drop Event Handlers
