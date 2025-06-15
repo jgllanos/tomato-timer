@@ -1,5 +1,8 @@
 import { toggleAnimation, resetAnimation, showAnimation } from './animations.js';
 
+const DISPLAY_UPDATE_INTERVAL = 100; // Update display every 100ms
+const ANIMATION_INTERVAL = 10; // Animate every 10 ticks (1 second)
+
 let timeLeft = 25 * 60; // 25 minutes in seconds
 let timerId = null;
 let currentTimerType = 'work'; // 'work', 'shortBreak', or 'longBreak'
@@ -27,7 +30,11 @@ export function startTimer() {
             timeLeft = Math.max(0, expectedTimeLeft - elapsedSeconds);
             
             updateDisplay();
-            toggleAnimation(currentTimerType);
+            
+            // Animate based on the configured interval
+            if (elapsedSeconds % ANIMATION_INTERVAL === 0) {
+                toggleAnimation(currentTimerType);
+            }
             
             if (timeLeft === 0) {
                 clearInterval(timerId);
@@ -35,7 +42,7 @@ export function startTimer() {
                 dingSound.play();
                 resetAnimation();
             }
-        }, 100); // Update more frequently for smoother display
+        }, DISPLAY_UPDATE_INTERVAL);
     }
 }
 
