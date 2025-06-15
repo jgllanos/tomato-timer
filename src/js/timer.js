@@ -3,6 +3,8 @@ import { toggleAnimation, resetAnimation, showAnimation } from './animations.js'
 let timeLeft = 25 * 60; // 25 minutes in seconds
 let timerId = null;
 let currentTimerType = 'work'; // 'work', 'shortBreak', or 'longBreak'
+let startTime = null;
+let expectedTimeLeft = null;
 
 const timerDisplay = document.querySelector('.timer-display');
 const dingSound = document.getElementById('dingSound');
@@ -17,17 +19,23 @@ function updateDisplay() {
 
 export function startTimer() {
     if (timerId === null) {
+        startTime = Date.now();
+        expectedTimeLeft = timeLeft;
+        
         timerId = setInterval(() => {
-            timeLeft--;
+            const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+            timeLeft = Math.max(0, expectedTimeLeft - elapsedSeconds);
+            
             updateDisplay();
             toggleAnimation(currentTimerType);
+            
             if (timeLeft === 0) {
                 clearInterval(timerId);
                 timerId = null;
                 dingSound.play();
                 resetAnimation();
             }
-        }, 1000);
+        }, 100); // Update more frequently for smoother display
     }
 }
 
