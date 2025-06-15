@@ -84,10 +84,36 @@ export function setTimer(minutes, type) {
 
 // Initialize event listeners
 export function initializeTimer() {
-    document.getElementById('start').addEventListener('click', startTimer);
-    document.getElementById('stop').addEventListener('click', stopTimer);
-    document.getElementById('reset').addEventListener('click', resetTimer);
-    document.getElementById('work').addEventListener('click', () => setTimer(25, 'work'));
-    document.getElementById('shortBreak').addEventListener('click', () => setTimer(5, 'shortBreak'));
-    document.getElementById('longBreak').addEventListener('click', () => setTimer(15, 'longBreak'));
+    const startStopButton = document.getElementById('startStop');
+    startStopButton.addEventListener('click', () => {
+        if (timerId === null) {
+            startTimer();
+            startStopButton.textContent = 'Stop';
+            startStopButton.classList.add('stopping');
+        } else {
+            stopTimer();
+            startStopButton.textContent = 'Start';
+            startStopButton.classList.remove('stopping');
+        }
+    });
+    document.getElementById('reset').addEventListener('click', () => {
+        resetTimer();
+        startStopButton.textContent = 'Start';
+        startStopButton.classList.remove('stopping');
+    });
+    document.getElementById('work').addEventListener('click', () => {
+        setTimer(25, 'work');
+        startStopButton.textContent = 'Start';
+        startStopButton.classList.remove('stopping');
+    });
+    document.getElementById('shortBreak').addEventListener('click', () => {
+        setTimer(5, 'shortBreak');
+        startStopButton.textContent = 'Start';
+        startStopButton.classList.remove('stopping');
+    });
+    document.getElementById('longBreak').addEventListener('click', () => {
+        setTimer(15, 'longBreak');
+        startStopButton.textContent = 'Start';
+        startStopButton.classList.remove('stopping');
+    });
 }

@@ -59,20 +59,28 @@ button:hover {
     background-color: #45a049;
 }
 
-#stop {
+#startStop {
+    background-color: #4CAF50;
+}
+
+#startStop:hover {
+    background-color: #45a049;
+}
+
+#startStop.stopping {
     background-color: #FFC107;
 }
 
-#stop:hover {
+#startStop.stopping:hover {
     background-color: #FFB300;
 }
 
 #reset {
-    background-color: #f44336;
+    background-color: #2196F3;
 }
 
 #reset:hover {
-    background-color: #da190b;
+    background-color: #1976D2;
 }
 
 /* Todo Section Styles */
