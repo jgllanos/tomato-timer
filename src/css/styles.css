@@ -60,19 +60,19 @@ button:hover {
 }
 
 #stop {
-    background-color: #f44336;
+    background-color: #FFC107;
 }
 
 #stop:hover {
-    background-color: #da190b;
+    background-color: #FFB300;
 }
 
 #reset {
-    background-color: #2196F3;
+    background-color: #f44336;
 }
 
 #reset:hover {
-    background-color: #1976D2;
+    background-color: #da190b;
 }
 
 /* Todo Section Styles */
@@ -93,6 +93,14 @@ button:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1.2rem;
+}
+
+#clearList {
+    background-color: #f44336;
+}
+
+#clearList:hover {
+    background-color: #da190b;
 }
 
 /* Todo Input */

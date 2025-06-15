@@ -239,10 +239,9 @@ export function initializeTodo() {
         }
     });
 
-    document.getElementById('newList').addEventListener('click', () => {
-        if (confirm('Are you sure you want to create a new list? This will clear the current list.')) {
+    document.getElementById('clearList').addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear the list? This will delete all the current tasks.')) {
             todoList.innerHTML = '';
-            listTitle.value = 'My Tasks';
         }
     });
 }
