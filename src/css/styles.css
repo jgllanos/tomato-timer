@@ -114,15 +114,20 @@ button:hover {
     align-items: center;
     padding: 0.5rem;
     border-bottom: 1px solid #eee;
+    cursor: move;
+    transition: background-color 0.2s ease;
+    position: relative;
+    user-select: none;
 }
 
-.todo-item.completed {
-    text-decoration: line-through;
-    color: #888;
+.todo-item span {
+    flex: 1;
+    pointer-events: none;
 }
 
 .todo-item input[type="checkbox"] {
     margin-right: 1rem;
+    pointer-events: auto;
 }
 
 .delete-btn {
@@ -130,10 +135,61 @@ button:hover {
     background-color: #ff4444;
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
+    pointer-events: auto;
 }
 
 .delete-btn:hover {
     background-color: #cc0000;
+}
+
+.todo-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item.dragging {
+    opacity: 0.5;
+    background-color: #f8f8f8;
+}
+
+.todo-item.drag-over {
+    background-color: #f0f8f0;
+}
+
+/* Top indicator */
+.todo-item.drag-over::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #4CAF50;
+    top: -1px;
+    z-index: 1;
+    display: none;
+}
+
+/* Bottom indicator */
+.todo-item.drag-over::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #4CAF50;
+    bottom: -1px;
+    z-index: 1;
+    display: none;
+}
+
+/* Show top indicator when dragging over top half */
+.todo-item.drag-over.drag-over-top::before {
+    display: block;
+}
+
+/* Show bottom indicator when dragging over bottom half */
+.todo-item.drag-over:not(.drag-over-top)::after {
+    display: block;
 }
 
 .animation-container {

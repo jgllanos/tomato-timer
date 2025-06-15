@@ -2,9 +2,20 @@ const todoList = document.getElementById('todoList');
 const newTodoInput = document.getElementById('newTodo');
 const listTitle = document.getElementById('listTitle');
 
+let draggedItem = null;
+
 function createTodoItem(text) {
     const li = document.createElement('li');
     li.className = 'todo-item';
+    li.draggable = true;
+    
+    // Add drag event listeners
+    li.addEventListener('dragstart', handleDragStart);
+    li.addEventListener('dragend', handleDragEnd);
+    li.addEventListener('dragover', handleDragOver);
+    li.addEventListener('dragenter', handleDragEnter);
+    li.addEventListener('dragleave', handleDragLeave);
+    li.addEventListener('drop', handleDrop);
     
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -38,6 +49,80 @@ function createTodoItem(text) {
     li.appendChild(span);
     li.appendChild(deleteBtn);
     return li;
+}
+
+// Drag and Drop Event Handlers
+function handleDragStart(e) {
+    draggedItem = this;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', ''); // Required for Firefox
+}
+
+function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.todo-item').forEach(item => {
+        item.classList.remove('drag-over');
+    });
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    
+    if (this !== draggedItem) {
+        const rect = this.getBoundingClientRect();
+        const mouseY = e.clientY - rect.top;
+        const threshold = rect.height / 2;
+        
+        if (mouseY < threshold) {
+            this.classList.add('drag-over-top');
+        } else {
+            this.classList.remove('drag-over-top');
+        }
+    }
+    return false;
+}
+
+function handleDragEnter(e) {
+    if (this !== draggedItem) {
+        const rect = this.getBoundingClientRect();
+        const mouseY = e.clientY - rect.top;
+        const threshold = rect.height / 2;
+        
+        this.classList.add('drag-over');
+        if (mouseY < threshold) {
+            this.classList.add('drag-over-top');
+        } else {
+            this.classList.remove('drag-over-top');
+        }
+    }
+}
+
+function handleDragLeave(e) {
+    this.classList.remove('drag-over');
+    this.classList.remove('drag-over-top');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    
+    if (this !== draggedItem) {
+        // Get the mouse position relative to the target item
+        const rect = this.getBoundingClientRect();
+        const mouseY = e.clientY - rect.top;
+        const threshold = rect.height / 2;
+        
+        // If mouse is in the top half, insert before the target
+        // If mouse is in the bottom half, insert after the target
+        if (mouseY < threshold) {
+            this.parentNode.insertBefore(draggedItem, this);
+        } else {
+            this.parentNode.insertBefore(draggedItem, this.nextSibling);
+        }
+    }
+    return false;
 }
 
 function addTodo() {
