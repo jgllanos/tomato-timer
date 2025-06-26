@@ -125,4 +125,15 @@ export function initializeTimer() {
         startStopButton.textContent = 'Start';
         startStopButton.classList.remove('stopping');
     });
+    // Add confetti trigger for YAY! button
+    document.getElementById('yay').addEventListener('click', () => {
+        if (window.confetti) {
+            confetti({
+                particleCount: 200,
+                spread: 90,
+                origin: { y: 0.6 },
+                zIndex: 9999
+            });
+        }
+    });
 }
