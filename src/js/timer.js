@@ -45,6 +45,15 @@ export function startTimer() {
                 timerId = null;
                 dingSound.play();
                 resetAnimation();
+                // Trigger confetti if work timer finished
+                if (currentTimerType === 'work' && window.confetti) {
+                    confetti({
+                        particleCount: 200,
+                        spread: 90,
+                        origin: { y: 0.6 },
+                        zIndex: 9999
+                    });
+                }
             }
         }, DISPLAY_UPDATE_INTERVAL);
     }
