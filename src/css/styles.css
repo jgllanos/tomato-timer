@@ -251,4 +251,12 @@ button:hover {
     top: 0;
     left: 0;
     transition: opacity 0.5s ease-in-out;
+}
+
+#yay {
+    background-color: #e6007a;
+}
+
+#yay:hover {
+    background-color: #ad0057;
 } 
