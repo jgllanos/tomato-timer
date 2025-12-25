@@ -4,6 +4,23 @@ const listTitle = document.getElementById('listTitle');
 
 let draggedItem = null;
 
+function updateCurrentTaskHighlight() {
+    // Remove current-task class from all items
+    document.querySelectorAll('.todo-item').forEach(item => {
+        item.classList.remove('current-task');
+    });
+    
+    // Find the first incomplete task
+    const firstIncomplete = Array.from(todoList.children).find(item => 
+        !item.classList.contains('completed')
+    );
+    
+    // Add current-task class to the first incomplete task
+    if (firstIncomplete) {
+        firstIncomplete.classList.add('current-task');
+    }
+}
+
 function createTodoItem(text) {
     const li = document.createElement('li');
     li.className = 'todo-item';
@@ -33,6 +50,7 @@ function createTodoItem(text) {
                 todoList.insertBefore(li, todoList.firstChild);
             }
         }
+        updateCurrentTaskHighlight();
     });
     
     const span = document.createElement('span');
@@ -50,6 +68,7 @@ function createTodoItem(text) {
     deleteBtn.textContent = '×';
     deleteBtn.addEventListener('click', () => {
         li.remove();
+        updateCurrentTaskHighlight();
     });
     
     li.appendChild(checkbox);
@@ -109,6 +128,7 @@ function saveEdit(li, input) {
         // Insert before delete button
         const deleteBtn = li.querySelector('.delete-btn');
         li.insertBefore(editBtn, deleteBtn);
+        updateCurrentTaskHighlight();
     } else {
         cancelEdit(li, input, li.dataset.originalText);
     }
@@ -205,6 +225,7 @@ function handleDrop(e) {
         } else {
             this.parentNode.insertBefore(draggedItem, this.nextSibling);
         }
+        updateCurrentTaskHighlight();
     }
     return false;
 }
@@ -227,6 +248,7 @@ function addTodo() {
             }
         }
         newTodoInput.value = '';
+        updateCurrentTaskHighlight();
     }
 }
 
@@ -242,6 +264,10 @@ export function initializeTodo() {
     document.getElementById('clearList').addEventListener('click', () => {
         if (confirm('Are you sure you want to clear the list? This will delete all the current tasks.')) {
             todoList.innerHTML = '';
+            updateCurrentTaskHighlight();
         }
     });
+    
+    // Update highlight on initial load if there are existing tasks
+    updateCurrentTaskHighlight();
 }
