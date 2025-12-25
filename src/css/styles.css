@@ -190,8 +190,23 @@ button:hover {
     background-color: #f0f8f0;
     border-left: 4px solid #4CAF50;
     font-weight: 600;
-    padding-left: calc(0.5rem + 4px);
+    font-size: 2em;
+    padding: 1rem;
+    padding-left: calc(1rem + 4px);
+    min-height: 2em;
     transition: all 0.3s ease;
+}
+
+.todo-item.current-task .delete-btn,
+.todo-item.current-task .edit-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+}
+
+.todo-item.current-task input[type="checkbox"] {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1.5rem;
 }
 
 .todo-item.dragging {
